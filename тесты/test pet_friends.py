@@ -24,8 +24,8 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert len(result['pets']) > 0
 
 
-def test_add_new_pet_with_valid_data(name='Yoda', animal_type='Master',
-                                     age='1000', pet_photo='images/01.jpg'):
+def test_add_new_pet_with_valid_data(name='Horse', animal_type='Mustang',
+                                     age='10', pet_photo='hello_html_2193b79f.jpg'):
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
 
     _, auth_key = pf.get_api_key(valid_email, valid_password)
@@ -45,11 +45,7 @@ def test_successful_delete_self_pet():
 
     # Проверяем - если список своих питомцев пустой, то добавляем нового и опять запрашиваем список своих питомцев
     if len(my_pets['pets']) == 0:
-        pf.add_new_pet(auth_key, "ЯйценКлацКлац", "собака", "4", "images/02.jpg")
-        _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
-
-    # Берём id первого питомца из списка и отправляем запрос на удаление
-    pet_id = my_pets['pets'][0]['id']
+        pf.add_new_pet(auth_key, "Siam", "cat", "5", "Загруженное.jpg")
     status, _ = pf.delete_pet(auth_key, pet_id)
 
     # Ещё раз запрашиваем список своих питомцев
@@ -60,7 +56,7 @@ def test_successful_delete_self_pet():
     assert pet_id not in my_pets.values()
 
 
-def test_successful_update_self_pet_info(name='Yoda', animal_type='Magister', age=2000):
+def test_successful_update_self_pet_info(name='Horse', animal_type='Mustang', age=10):
     """Проверяем возможность обновления информации о питомце"""
 
     # Получаем ключ auth_key и список своих питомцев
@@ -80,8 +76,8 @@ def test_successful_update_self_pet_info(name='Yoda', animal_type='Magister', ag
 
 
 # Тест №1
-def test_add_new_pet_simple_with_valid_data_without_photo(name='ЯйценКлацКлац', animal_type='Собака',
-                                                          age='4'):
+def test_add_new_pet_simple_with_valid_data_without_photo(name='Siam', animal_type='cat',
+                                                          age='5'):
     """Проверяем возможность добавления нового питомца с корректными данными, но без фото"""
 
     # Запрашиваем ключ api и сохраняем в переменную auth_key
@@ -97,7 +93,7 @@ def test_add_new_pet_simple_with_valid_data_without_photo(name='ЯйценКла
 
 
 # Тест №2
-def test_add_photo_of_pet(pet_photo='images/02.jpg'):
+def test_add_photo_of_pet(pet_photo='Загруженное.jpg'):
     """Проверяем возможность добавления фото в созданного питомца без фото"""
 
     # Получаем ключ auth_key и список своих питомцев
@@ -113,8 +109,8 @@ def test_add_photo_of_pet(pet_photo='images/02.jpg'):
 
 
 # Тест №3
-def test_add_new_pet_with_invalid_pet_photo(name='Yoda', animal_type='Master',
-                                            age='1000',
+def test_add_new_pet_with_invalid_pet_photo(name='Horse', animal_type='Mustang',
+                                            age='10',
                                             pet_photo=' '):
     """Проверяем, что нельзя добавить питомца, если не указан путь до файла с фото"""
 
@@ -145,8 +141,8 @@ def test_get_api_key_for_invalid_user(email=valid_email, password='0000'):
 
 
 # Тест №5
-def test_add_new_pet_with_negative_age(name='Yoda', animal_type='Master',
-                                       age='-4000', pet_photo='images/01.jpg'):
+def test_add_new_pet_with_negative_age(name='Horse', animal_type='Mustang',
+                                       age='-10', pet_photo='hello_html_2193b79f.jpg'):
     """Проверяем, что нельзя добавить питомца с отрицательным возрастом"""
 
     # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
@@ -164,7 +160,7 @@ def test_add_new_pet_with_negative_age(name='Yoda', animal_type='Master',
 
 # Тест №6
 def test_add_new_pet_without_data_with_photo(name='', animal_type='',
-                                             age='', pet_photo='images/01.jpg'):
+                                             age='', pet_photo='hello_html_2193b79f.jpg'):
     """Проверяем, что нельзя добавить питомца без данных, но с фото"""
 
     # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
@@ -181,8 +177,8 @@ def test_add_new_pet_without_data_with_photo(name='', animal_type='',
 
 
 # Тест №7
-def test_add_new_pet_with_unacceptable_name(name='!@#$%^&*', animal_type='Master',
-                                            age='1000', pet_photo='images/01.jpg'):
+def test_add_new_pet_with_unacceptable_name(name='!@#$%^&*', animal_type='Mustang',
+                                            age='10', pet_photo='hello_html_2193b79f.jpg'):
     """Проверяем, что нельзя добавить питомца с именем из символов"""
 
     # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
@@ -199,7 +195,7 @@ def test_add_new_pet_with_unacceptable_name(name='!@#$%^&*', animal_type='Master
 
 
 # Тест №8
-def test_update_self_pet_info_with_invalid_id(name='Yoda', animal_type='Magister', age=2000):
+def test_update_self_pet_info_with_invalid_id(name='Horse', animal_type='Mustang', age=20):
     """Проверяем отсутствие возможности обновления информации о питомце с неправильным id"""
 
     # Получаем ключ auth_key и список своих питомцев
@@ -219,7 +215,7 @@ def test_update_self_pet_info_with_invalid_id(name='Yoda', animal_type='Magister
 
 
 # Тест №9
-def test_update_pet_info_with_unacceptable_name(name='Yoda', animal_type='Magister', age=1000):
+def test_update_pet_info_with_unacceptable_name(name='Horse', animal_type='Mustang', age=10):
     """Проверяем отсутствие возможности обновления информации о питомце с неприемлемым именем(из символов)"""
 
     # Получаем ключ auth_key и список своих питомцев
